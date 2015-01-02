@@ -31,12 +31,12 @@ public class ReservaService {
         return dao.getListResultOfNamedQuery("Hotel.getQuartosDesocupados", params);
     }
 
-    /**
-     * Web service operation
-     */
-    @WebMethod(operationName = "Reservar")
-    public int Reservar(int idQuarto, String nomePessoa, String documento, Date dataEntrada, Date dataSaida) {
-
-    }
+//    /**
+//     * Web service operation
+//     */
+//    @WebMethod(operationName = "Reservar")
+//    public int Reservar(int idQuarto, String nomePessoa, String documento, Date dataEntrada, Date dataSaida) {
+//
+//    }
 
 }
