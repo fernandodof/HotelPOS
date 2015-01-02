@@ -22,7 +22,8 @@ import javax.persistence.OneToOne;
 @Entity
 @NamedQueries({
     @NamedQuery(name = "Hotel.getHotelByName", query = "SELECT H FROM Hotel H WHERE H.nome = :nome"),
-    @NamedQuery(name = "Hotel.getQuartosDesocupados", query = "SELECT Q FROM Hotel H, IN (H.quartos) Q WHERE H.nome LIKE :nome AND Q.ocupado = FALSE")
+    @NamedQuery(name = "Hotel.getQuartosDesocupados", query = "SELECT Q FROM Hotel H, IN (H.quartos) Q WHERE H.nome LIKE :nome AND Q.ocupado = FALSE"),
+    @NamedQuery(name = "Hotel.getQuartosDesocupadosByIdHotel", query = "SELECT Q FROM Hotel H, IN (H.quartos) Q WHERE H.id = :id AND Q.ocupado = FALSE")
 })
 public class Hotel implements Serializable {
 

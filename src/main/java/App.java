@@ -1,8 +1,9 @@
 
 import br.com.pos.hotel.beans.Hotel;
-import br.com.pos.hotel.beans.Quarto;
 import br.com.pos.hotel.dao.GenericDAO;
 import br.com.pos.hotel.dao.GenericDAOImp;
+import br.com.pos.hotel.services.ReservaService;
+import java.util.List;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -29,8 +30,20 @@ public class App {
 //        hotel1.addQuarto(quarto);
 //        
 //        genericDAO.update(hotel1);
+//
+//        Quarto quarto = (Quarto) genericDAO.getListResultOfNamedQueryWithLimit("Quarto.getDesocupado",0, 1).get(0);
+//        System.out.println(quarto);
 
-        Quarto quarto = (Quarto) genericDAO.getListResultOfNamedQueryWithLimit("Quarto.getDesocupado",0, 1).get(0);
-        System.out.println(quarto);
+        List<Hotel> hoteis = genericDAO.getAll(Hotel.class);
+
+        for (Hotel hotei : hoteis) {
+            System.out.println(hotei.getNome());
+        }
+
+        ReservaService reservaService = new ReservaService();
+        hoteis = reservaService.getHoteis();
+        for (Hotel hotei : hoteis) {
+            System.out.println(hotei.getNome());
+        }
     }
 }
