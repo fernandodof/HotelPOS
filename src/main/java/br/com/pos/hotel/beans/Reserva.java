@@ -1,5 +1,6 @@
 package br.com.pos.hotel.beans;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +15,7 @@ import javax.persistence.TemporalType;
  */
 
 @Entity
-class Reserva {
+class Reserva implements Serializable {
     
     @Id
     @GeneratedValue
@@ -30,8 +31,7 @@ class Reserva {
         
     }
 
-    public Reserva(int id, Date dataEntrada, Date dataSaida, Pessoa pessoa) {
-        this.id = id;
+    public Reserva(Date dataEntrada, Date dataSaida, Pessoa pessoa) {
         this.dataEntrada = dataEntrada;
         this.dataSaida = dataSaida;
         this.pessoa = pessoa;

@@ -1,5 +1,6 @@
 package br.com.pos.hotel.beans;
 
+import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,7 +14,7 @@ import javax.persistence.OneToOne;
  */
 
 @Entity
-public class Pessoa {
+public class Pessoa implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,8 +29,7 @@ public class Pessoa {
     public Pessoa() {
     }
 
-    public Pessoa(int id, String nome, String documento, Quarto quarto, Reserva reserva) {
-        this.id = id;
+    public Pessoa(String nome, String documento, Quarto quarto, Reserva reserva) {
         this.nome = nome;
         this.documento = documento;
         this.quarto = quarto;

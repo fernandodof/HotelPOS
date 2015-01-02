@@ -1,5 +1,6 @@
 package br.com.pos.hotel.beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -20,8 +21,10 @@ import javax.persistence.OneToOne;
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "Hotel.getHotelByName", query = "SELECT h FROM Hotel h WHERE h.nome = :nome")})
-public class Hotel {
+    @NamedQuery(name = "Hotel.getHotelByName", query = "SELECT H FROM Hotel H WHERE H.nome = :nome"),
+    @NamedQuery(name = "Hotel.getQuartosDesocupados", query = "SELECT Q FROM Hotel H, IN (H.quartos) Q WHERE H.nome LIKE :nome AND Q.ocupado = FALSE")
+})
+public class Hotel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -72,8 +75,8 @@ public class Hotel {
     public void setQuartos(List<Quarto> quartos) {
         this.quartos = quartos;
     }
-    
-    public void addQuarto(Quarto quarto){
+
+    public void addQuarto(Quarto quarto) {
         this.quartos.add(quarto);
     }
 
@@ -81,5 +84,5 @@ public class Hotel {
     public String toString() {
         return "Hotel{" + "id=" + id + ", nome=" + nome + ", endereco=" + endereco + ", quartos=" + quartos + '}';
     }
-    
+
 }
