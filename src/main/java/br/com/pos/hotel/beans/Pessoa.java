@@ -21,6 +21,7 @@ public class Pessoa implements Serializable {
     private int id;
     private String nome;
     private String documento;
+    @OneToOne
     private Quarto quarto;
     
     @OneToOne(cascade = CascadeType.ALL)
@@ -75,6 +76,4 @@ public class Pessoa implements Serializable {
     public void setReserva(Reserva reserva) {
         this.reserva = reserva;
     }
-    
-    
 }

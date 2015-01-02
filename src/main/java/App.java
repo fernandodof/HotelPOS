@@ -1,5 +1,7 @@
 
+import br.com.pos.hotel.beans.Endereco;
 import br.com.pos.hotel.beans.Hotel;
+import br.com.pos.hotel.beans.Quarto;
 import br.com.pos.hotel.dao.GenericDAO;
 import br.com.pos.hotel.dao.GenericDAOImp;
 import br.com.pos.hotel.services.ReservaService;
@@ -16,20 +18,22 @@ import java.util.List;
  */
 public class App {
 
-    public static void main(String args[]) {
-//        Endereco endereco = new Endereco("Rua do bobos", "Cidade", "Estado", "68.234-023", "500");
-//        Hotel hotel = new Hotel("Gravatá", endereco);
+    public static void main(String args[]) {        
+        GenericDAO genericDAO = new GenericDAOImp();
+        Endereco endereco = new Endereco("Rua do bobos", "Cidade", "Estado", "68.234-023", "500");
+        Hotel hotel = new Hotel("Gravatá", endereco);
+        genericDAO.save(hotel);
 
 //        Map<String, Object> params = new HashMap();
 //        params.put("nome", "Gravatá");
 //        
-        GenericDAO genericDAO = new GenericDAOImp();
+
 //        Hotel hotel1 = (Hotel) genericDAO.getSingleResultOfNamedQuery("Hotel.getHotelByName",params);
 //        
-//        Quarto quarto = new Quarto(1, false, 30.00);
-//        hotel1.addQuarto(quarto);
-//        
-//        genericDAO.update(hotel1);
+        Quarto quarto = new Quarto(1, false, 30.00);
+        hotel.addQuarto(quarto);
+        
+        genericDAO.update(hotel);
 //
 //        Quarto quarto = (Quarto) genericDAO.getListResultOfNamedQueryWithLimit("Quarto.getDesocupado",0, 1).get(0);
 //        System.out.println(quarto);

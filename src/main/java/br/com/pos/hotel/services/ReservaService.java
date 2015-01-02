@@ -1,7 +1,9 @@
 package br.com.pos.hotel.services;
 
 import br.com.pos.hotel.beans.Hotel;
+import br.com.pos.hotel.beans.Pessoa;
 import br.com.pos.hotel.beans.Quarto;
+import br.com.pos.hotel.beans.Reserva;
 import br.com.pos.hotel.dao.GenericDAO;
 import br.com.pos.hotel.dao.GenericDAOImp;
 import java.util.Date;
@@ -42,6 +44,8 @@ public class ReservaService {
 
     /**
      * Web service operation
+     *
+     * @return
      */
     @WebMethod(operationName = "getHoteis")
     public List<Hotel> getHoteis() {
@@ -53,11 +57,28 @@ public class ReservaService {
         return (Hotel) dao.getById(Hotel.class, id);
     }
 
-//    /**
-//     * Web service operation
-//     */
-//    @WebMethod(operationName = "Reservar")
-//    public int Reservar(int idQuarto, String nomePessoa, String documento, Date dataEntrada, Date dataSaida) {
-//
-//    }
+    @WebMethod(operationName = "getQuartoByID")
+    public Quarto getQuartoById(int id) {
+        return (Quarto) dao.getById(Quarto.class, id);
+    }
+
+    /**
+     * Web service operation
+     *
+     * @param idQuarto
+     * @param nomePessoa
+     * @param documento
+     * @param dataEntrada
+     * @param dataSaida
+     * @return
+     */
+    @WebMethod(operationName = "Reservar")
+    public boolean reservar(int idQuarto, String nomePessoa, String documento, Date dataEntrada, Date dataSaida) {
+        Quarto quarto = (Quarto) dao.getById(Quarto.class, idQuarto);
+        Reserva reserva = new Reserva(dataEntrada, dataSaida);
+
+        Pessoa pessoa = new Pessoa(nomePessoa, documento, quarto, reserva);
+        dao.save(pessoa);
+        return true;
+    }
 }

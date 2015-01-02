@@ -5,7 +5,6 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -15,7 +14,7 @@ import javax.persistence.TemporalType;
  */
 
 @Entity
-class Reserva implements Serializable {
+public class Reserva implements Serializable {
     
     @Id
     @GeneratedValue
@@ -24,17 +23,14 @@ class Reserva implements Serializable {
     private Date dataEntrada;
     @Temporal(TemporalType.DATE)
     private Date dataSaida;
-    @OneToOne
-    private Pessoa pessoa;
 
     public Reserva() {
         
     }
 
-    public Reserva(Date dataEntrada, Date dataSaida, Pessoa pessoa) {
+    public Reserva(Date dataEntrada, Date dataSaida) {
         this.dataEntrada = dataEntrada;
         this.dataSaida = dataSaida;
-        this.pessoa = pessoa;
     }
     
     public int getId() {
@@ -60,14 +56,5 @@ class Reserva implements Serializable {
     public void setDataSaida(Date dataSaida) {
         this.dataSaida = dataSaida;
     }
-
-    public Pessoa getPessoa() {
-        return pessoa;
-    }
-
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
-    }
-
     
 }
