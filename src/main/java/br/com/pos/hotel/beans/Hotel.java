@@ -23,7 +23,7 @@ import javax.persistence.OneToOne;
 @NamedQueries({
     @NamedQuery(name = "Hotel.getHotelByName", query = "SELECT H FROM Hotel H WHERE H.nome = :nome"),
     @NamedQuery(name = "Hotel.getQuartosDesocupados", query = "SELECT Q FROM Hotel H, IN (H.quartos) Q WHERE H.nome LIKE :nome AND Q.ocupado = FALSE"),
-    @NamedQuery(name = "Hotel.getQuartosDesocupadosByIdHotel", query = "SELECT Q FROM Hotel H, IN (H.quartos) Q WHERE H.id = :id AND Q.ocupado = FALSE")
+    @NamedQuery(name = "Hotel.getQuartosDesocupadosByIdHotel", query = "SELECT Q FROM Hotel H, IN (H.quartos) Q WHERE H.id = :id AND Q.ocupado = FALSE"),
 })
 public class Hotel implements Serializable {
 
@@ -34,8 +34,10 @@ public class Hotel implements Serializable {
     private String nome;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Endereco endereco;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Quarto> quartos = new ArrayList();
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Reserva> reservas = new ArrayList();
 
     public Hotel() {
     }
@@ -77,13 +79,25 @@ public class Hotel implements Serializable {
         this.quartos = quartos;
     }
 
+    public List<Reserva> getReservas() {
+        return reservas;
+    }
+
+    public void setReservas(List<Reserva> reservas) {
+        this.reservas = reservas;
+    }
+
     public void addQuarto(Quarto quarto) {
         this.quartos.add(quarto);
+    }
+    
+    public void addReserva(Reserva reserva) {
+        this.reservas.add(reserva);
     }
 
     @Override
     public String toString() {
-        return "Hotel{" + "id=" + id + ", nome=" + nome + ", endereco=" + endereco + ", quartos=" + quartos + '}';
+        return "Hotel{" + "id=" + id + ", nome=" + nome + ", endereco=" + endereco + ", quartos=" + quartos + ", reservas=" + reservas + '}';
     }
 
 }

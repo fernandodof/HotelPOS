@@ -12,10 +12,9 @@ import javax.persistence.TemporalType;
  *
  * @author Fernando
  */
-
 @Entity
 public class Reserva implements Serializable {
-    
+
     @Id
     @GeneratedValue
     private int id;
@@ -25,14 +24,14 @@ public class Reserva implements Serializable {
     private Date dataSaida;
 
     public Reserva() {
-        
+
     }
 
     public Reserva(Date dataEntrada, Date dataSaida) {
         this.dataEntrada = dataEntrada;
         this.dataSaida = dataSaida;
     }
-    
+
     public int getId() {
         return id;
     }
@@ -56,5 +55,10 @@ public class Reserva implements Serializable {
     public void setDataSaida(Date dataSaida) {
         this.dataSaida = dataSaida;
     }
-    
+
+    @Override
+    public String toString() {
+        return "Reserva{" + "id=" + id + ", dataEntrada=" + dataEntrada + ", dataSaida=" + dataSaida + '}';
+    }
+
 }

@@ -1,10 +1,7 @@
 
-import br.com.pos.hotel.beans.Endereco;
-import br.com.pos.hotel.beans.Hotel;
-import br.com.pos.hotel.beans.Quarto;
+import br.com.pos.hotel.beans.Reserva;
 import br.com.pos.hotel.dao.GenericDAO;
 import br.com.pos.hotel.dao.GenericDAOImp;
-import br.com.pos.hotel.services.ReservaService;
 import java.util.List;
 
 /*
@@ -20,9 +17,9 @@ public class App {
 
     public static void main(String args[]) {        
         GenericDAO genericDAO = new GenericDAOImp();
-        Endereco endereco = new Endereco("Rua do bobos", "Cidade", "Estado", "68.234-023", "500");
-        Hotel hotel = new Hotel("Gravatá", endereco);
-        genericDAO.save(hotel);
+//        Endereco endereco = new Endereco("Rua do bobos", "Cidade", "Estado", "68.234-023", "500");
+//        Hotel hotel = new Hotel("Gravatá", endereco);
+//        genericDAO.save(hotel);
 
 //        Map<String, Object> params = new HashMap();
 //        params.put("nome", "Gravatá");
@@ -30,24 +27,31 @@ public class App {
 
 //        Hotel hotel1 = (Hotel) genericDAO.getSingleResultOfNamedQuery("Hotel.getHotelByName",params);
 //        
-        Quarto quarto = new Quarto(1, false, 30.00);
-        hotel.addQuarto(quarto);
-        
-        genericDAO.update(hotel);
+//        Quarto quarto = new Quarto(1, false, 30.00);
+//        hotel.addQuarto(quarto);
+//        
+//        genericDAO.update(hotel);
 //
 //        Quarto quarto = (Quarto) genericDAO.getListResultOfNamedQueryWithLimit("Quarto.getDesocupado",0, 1).get(0);
 //        System.out.println(quarto);
 
-        List<Hotel> hoteis = genericDAO.getAll(Hotel.class);
-
-        for (Hotel hotei : hoteis) {
-            System.out.println(hotei.getNome());
+//        List<Hotel> hoteis = genericDAO.getAll(Hotel.class);
+//
+//        for (Hotel hotei : hoteis) {
+//            System.out.println(hotei.getNome());
+//        }
+//
+//        ReservaService reservaService = new ReservaService();
+//        hoteis = reservaService.getHoteis();
+//        for (Hotel hotei : hoteis) {
+//            System.out.println(hotei.getNome());
+//        }
+        
+        List<Reserva> rs = genericDAO.getAll(Reserva.class);
+        
+        for (Reserva r : rs) {
+            System.out.println(r);
         }
-
-        ReservaService reservaService = new ReservaService();
-        hoteis = reservaService.getHoteis();
-        for (Hotel hotei : hoteis) {
-            System.out.println(hotei.getNome());
-        }
+        
     }
 }
