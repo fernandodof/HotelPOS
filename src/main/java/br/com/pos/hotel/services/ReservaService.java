@@ -74,17 +74,24 @@ public class ReservaService {
      * @return
      */
     @WebMethod(operationName = "Reservar")
-    public boolean reservar(int idHotel,int idQuarto, String nomePessoa, String documento, Date dataEntrada, Date dataSaida) {
+    public boolean reservar(int idHotel, int idQuarto, String nomePessoa, String documento, Date dataEntrada, Date dataSaida) {
         Quarto quarto = (Quarto) dao.getById(Quarto.class, idQuarto);
-        Reserva reserva = new Reserva(dataEntrada, dataSaida);
 
-        Pessoa pessoa = new Pessoa(nomePessoa, documento, quarto, reserva);
-        dao.save(pessoa);
-        
+        Pessoa pessoa = (Pessoa) dao.getById(Pessoa.class, documento); 
+        if (pessoa == null) {
+            pessoa = new Pessoa(nomePessoa, documento);
+            dao.save(pessoa);
+        }else{
+            pessoa.setNome(nomePessoa);
+            dao.update(pessoa);
+        }
+
+        Reserva reserva = new Reserva(dataEntrada, dataSaida, pessoa, quarto);
+
         Hotel hotel = (Hotel) dao.getById(Hotel.class, idHotel);
         hotel.addReserva(reserva);
         dao.update(hotel);
-        
+
         return true;
     }
 
